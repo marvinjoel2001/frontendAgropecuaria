@@ -12,21 +12,34 @@ import User from './pages/User';
 import DetalleVenta from './pages/DetalleVenta';
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const initialLoggedInState = localStorage.getItem('isLoggedIn') === 'true';
+    const [isLoggedIn, setIsLoggedIn] = useState(initialLoggedInState);
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', true);
+        window.location.reload(); // Recargar la página después de iniciar sesión
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem('isLoggedIn');
+        window.location.reload();
     };
 
     return (
-
-
-
-
-                        <Dashboard />
-
-
-
+        <div className="App">
+            <Router>
+                <Switch>
+                    <Route exact path="/login">
+                        {isLoggedIn ? <Redirect to="/" /> : <Login onLoginSuccess={handleLoginSuccess} />}
+                    </Route>
+                    <Route path="/">
+                        {isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Redirect to="/login" />}
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
     );
 }
 

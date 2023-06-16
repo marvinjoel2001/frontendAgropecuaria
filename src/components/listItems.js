@@ -9,6 +9,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import {CloseSharp} from "@mui/icons-material";
 
 export const mainListItems = (
     <React.Fragment>
@@ -48,6 +49,13 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary="Producto" />
         </ListItemButton>
+        <ListItemButton component="a" href="/Cerrar Sesion" sx={{ color: 'red' }}>
+            <ListItemIcon sx={{ color: 'red' }}>
+                <CloseSharp />
+            </ListItemIcon>
+            <ListItemText primary="Cerrar Sesion" primaryTypographyProps={{ style: { color: 'red' } }} />
+        </ListItemButton>
+
     </React.Fragment>
 );
 

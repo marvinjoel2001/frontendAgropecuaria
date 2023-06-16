@@ -28,7 +28,29 @@ import Venta from '../pages/Venta';
 import DetalleVenta from '../pages/DetalleVenta';
 import User from '../pages/User';
 import Movimiento from '../pages/Movimiento';
-import Reporte from "../pages/Reporte";
+import Reporte from '../pages/Reporte';
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
+
+function CloseSharpIcon() {
+    return null;
+}
+
+function LogoutButton({ handleLogout }) {
+    const handleClick = () => {
+        // Lógica para cerrar sesión
+    };
+
+    return (
+        <ListItemButton component="button" onClick={handleLogout} sx={{ color: 'red' }}>
+            <ListItemIcon sx={{ color: 'red' }}>
+                <CloseSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cerrar Sesión" primaryTypographyProps={{ style: { color: 'red' } }} />
+        </ListItemButton>
+    );
+}
 
 function Copyright(props) {
     return (
@@ -63,46 +85,45 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        '& .MuiDrawer-paper': {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        boxSizing: 'border-box',
+        ...(!open && {
+            overflowX: 'hidden',
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
+                duration: theme.transitions.duration.leavingScreen,
             }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
-                },
-            }),
-        },
-    }),
-);
+            width: theme.spacing(7),
+            [theme.breakpoints.up('sm')]: {
+                width: theme.spacing(9),
+            },
+        }),
+    },
+}));
 
 const defaultTheme = createTheme();
 
-export default function Dashboard() {
+export default function Dashboard({ handleLogout }) {
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
     };
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
                 <Router>
-                    <AppBar position="absolute" open={open} sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
+                    <AppBar position="absolute" open={open} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                         <Toolbar
                             sx={{
                                 pr: '24px', // keep right padding when drawer closed
@@ -121,7 +142,7 @@ export default function Dashboard() {
                                 <MenuIcon />
                             </IconButton>
                             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-                                Dashboard
+                                Panel de Control
                             </Typography>
                             <IconButton color="inherit">
                                 <Badge badgeContent={4} color="secondary">
@@ -130,7 +151,7 @@ export default function Dashboard() {
                             </IconButton>
                         </Toolbar>
                     </AppBar>
-                    <Drawer variant="permanent" open={open}>
+                    <Drawer variant="permanent" open={open} sx={{ position: 'absolute', left: 0 }}>
                         <Toolbar
                             sx={{
                                 display: 'flex',
@@ -155,16 +176,18 @@ export default function Dashboard() {
                             height: '100vh',
                             overflow: 'auto',
                             ml: { sm: `-${drawerWidth}px` },
-                            transition: theme => theme.transitions.create('margin', {
-                                easing: theme.transitions.easing.sharp,
-                                duration: theme.transitions.duration.leavingScreen,
-                            }),
+                            transition: (theme) =>
+                                theme.transitions.create('margin', {
+                                    easing: theme.transitions.easing.sharp,
+                                    duration: theme.transitions.duration.leavingScreen,
+                                }),
                             ...(open && {
                                 ml: '0',
-                                transition: theme => theme.transitions.create('margin', {
-                                    easing: theme.transitions.easing.sharp,
-                                    duration: theme.transitions.duration.enteringScreen,
-                                }),
+                                transition: (theme) =>
+                                    theme.transitions.create('margin', {
+                                        easing: theme.transitions.easing.sharp,
+                                        duration: theme.transitions.duration.enteringScreen,
+                                    }),
                             }),
                         }}
                     >
@@ -188,8 +211,8 @@ export default function Dashboard() {
                                             <Route path="/movimiento" component={Movimiento} />
                                             <Route path="/user" component={User} />
                                             <Route path="/detalleventa" component={DetalleVenta} />
-
                                         </Switch>
+                                        <LogoutButton handleLogout={handleLogout} />
                                     </Paper>
                                 </Grid>
                             </Grid>
