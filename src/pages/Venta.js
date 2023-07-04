@@ -1,20 +1,17 @@
 import * as React from 'react';
 import Link from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Title from '../components/Title';
-
 import DataTable from "../components/Datatable";
+import FormularioVenta from "../components/FormVent";
 
 // Generate Order Data
 
 function preventDefault(event) {
     event.preventDefault();
 }
+function showForm(){
 
+}
 const titles = [
     {
         name: 'id',
@@ -46,16 +43,19 @@ const titles = [
     },
 ];
 const apiEndpoint = "http://127.0.0.1:8000/api/ventas/";
+
 export default function Venta() {
     return (
         <React.Fragment>
-            <Title>Ventas</Title>
-
+            <div style={{ paddingTop: '64px', paddingRight: '16px' }}>
+                <Title>Ventas</Title>
+                <button onClick={showForm}>Añadir Venta</button>
                 <DataTable titles={titles} apiEndpoint={apiEndpoint} />
-
-            <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-                See more orders
-            </Link>
+                <FormularioVenta/>
+                <Link color="primary" href="#" onClick={preventDefault} style={{ marginTop: '16px' }}>
+                    See more orders
+                </Link>
+            </div>
         </React.Fragment>
     );
 }

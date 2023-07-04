@@ -175,31 +175,23 @@ export default function Dashboard({ handleLogout }) {
                             flexGrow: 1,
                             height: '100vh',
                             overflow: 'auto',
-                            ml: { sm: `-${drawerWidth}px` },
-                            transition: (theme) =>
-                                theme.transitions.create('margin', {
-                                    easing: theme.transitions.easing.sharp,
-                                    duration: theme.transitions.duration.leavingScreen,
-                                }),
-                            ...(open && {
-                                ml: '0',
-                                transition: (theme) =>
-                                    theme.transitions.create('margin', {
-                                        easing: theme.transitions.easing.sharp,
-                                        duration: theme.transitions.duration.enteringScreen,
-                                    }),
+                            ml: { sm: open ? `-${drawerWidth}px` : 0 },
+                            transition: theme => theme.transitions.create('margin', {
+                                easing: theme.transitions.easing.sharp,
+                                duration: theme.transitions.duration.leavingScreen,
                             }),
                         }}
                     >
                         <Toolbar />
                         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                            <Grid container spacing={3}>
+                            <Grid container spacing={4}>
                                 <Grid item xs={12}>
                                     <Paper
                                         sx={{
                                             p: 2,
                                             display: 'flex',
                                             flexDirection: 'column',
+                                            justifyContent: 'flex-start',
                                         }}
                                     >
                                         <Switch>
@@ -221,6 +213,7 @@ export default function Dashboard({ handleLogout }) {
                             </Box>
                         </Container>
                     </Box>
+
                 </Router>
             </Box>
         </ThemeProvider>
