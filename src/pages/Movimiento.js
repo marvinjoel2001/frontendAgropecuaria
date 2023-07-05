@@ -13,19 +13,45 @@ import DataTable from "../components/Datatable";
 function preventDefault(event) {
     event.preventDefault();
 }
-const titles = ["Id", "Tipo", "Fecha", "Cantidad", "Motivo", "Recepcionista"];
-const apiEndpoint = "http://127.0.0.1:8000/api/movimientos";
+
 export default function Movimiento() {
+    const titles = [
+        {
+            name: 'id',
+            label: 'Id',
+        },
+        {
+            name: 'fecha',
+            label: 'Fecha',
+        },
+        {
+            name: 'tipo',
+            label: 'Tipo',
+        },
+        {
+            name: 'cantidad',
+            label: 'Cantidad',
+        },
+        {
+            name: 'motivo',
+            label: 'Motivo',
+        },
+        {
+            name: 'usuario',
+            label: 'Vendedor',
+        },
+        {
+            name: 'producto',
+            label: 'CodigoProducto',
+        },
+    ];
+    const apiEndpoint = "http://127.0.0.1:8000/api/movimientos/";
+
+
     return (
         <React.Fragment>
-            <Title>Ventas</Title>
-            <Table size="small">
-                <h1>Tabla Movimientos</h1>
+            <Title>Movimientos</Title>
                 <DataTable titles={titles} apiEndpoint={apiEndpoint} />
-            </Table>
-            <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-                See more orders
-            </Link>
         </React.Fragment>
     );
 }

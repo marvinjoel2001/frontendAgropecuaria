@@ -13,14 +13,32 @@ import DataTable from "../components/Datatable";
 function preventDefault(event) {
     event.preventDefault();
 }
-const titles = ["Id", "Total", "Fecha", "Direccion", "Metodo Pago", "Cliente", "Vendedor"];
-const apiEndpoint = "http://127.0.0.1:8000/api/Ventas";
+
 export default function User() {
+    const titles = [
+        {
+            name: 'id',
+            label: 'Codigo de Usuario',
+        },
+        {
+            name: 'username',
+            label: 'Nombre',
+        },
+        {
+            name: 'email',
+            label: 'Correo electronico',
+        },
+        {
+            name: 'date_joined',
+            label: 'Fecha Añadido',
+        },
+    ];
+    const apiEndpoint = "http://127.0.0.1:8000/api/user/";
     return (
         <React.Fragment>
-            <Title>Ventas</Title>
+            <Title>Usuarios</Title>
             <Table size="small">
-                <h1>Tabla Ventas</h1>
+                <h1>Vendedores</h1>
                 <DataTable titles={titles} apiEndpoint={apiEndpoint} />
             </Table>
             <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>

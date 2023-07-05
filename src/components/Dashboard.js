@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled, createTheme, ThemeProvider,sx } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -112,7 +112,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 export default function Dashboard({ handleLogout }) {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -180,6 +180,7 @@ export default function Dashboard({ handleLogout }) {
                                 easing: theme.transitions.easing.sharp,
                                 duration: theme.transitions.duration.leavingScreen,
                             }),
+                            filter: open ? 'blur(3px)' : 'none', // Aplicar el filtro de desenfoque cuando open es true
                         }}
                     >
                         <Toolbar />
