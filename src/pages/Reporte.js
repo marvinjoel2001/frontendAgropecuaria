@@ -1,14 +1,17 @@
 import React from 'react';
 import programadorImg from '../assets/programador.png';
+import Grafico from "../components/Grafico";
+import BarChart from "../components/Grafico";
 
 const Reporte = () => {
+    const endpoint = "http://127.0.0.1:8000/api/ventas/";
+    const titulo1 = "total";
+    const titulo2 = "fecha";
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
-            <img src={programadorImg} alt="Programador" style={{ width: '600px' }} />
-            <p style={{ marginTop: '20px', fontSize: '18px', textAlign: 'center' }}>
-                Estamos trabajando para desarrollar este módulo
-            </p>
-        </div>
+        <React.Fragment>
+        <h1>Aplicación de Gráficos de Ventas</h1>
+            <BarChart endpoint={endpoint} dataAttr1={titulo1} dataAttr2={titulo2} />
+        </React.Fragment>
     );
 };
 
