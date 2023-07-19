@@ -83,13 +83,23 @@ export default function FormularioVenta() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('http://127.0.0.1:8000/api/ventas/create/', formData);
+            const response = await axios.post('http://127.0.0.1:8000/api/ventas/create/', formData);
             console.log('Formulario enviado exitosamente');
+            alert('La venta solo se realizara si cuentas con stock del producto');
             window.location.reload(); // Recargar la página
+            // Mostrar alerta con el mensaje devuelto por el servidor
         } catch (error) {
             console.error(error);
+            // Mostrar alerta de error
+            if (error.response && error.response.data && error.response.data.mensaje) {
+                alert(error.response.data.mensaje);
+            } else {
+                alert('Error al realizar la venta.');
+            }
         }
     };
+
+
 
     return (
         <form onSubmit={handleSubmit}>

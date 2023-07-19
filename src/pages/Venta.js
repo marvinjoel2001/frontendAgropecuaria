@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import DataTable from "../components/Datatable";
 import FormularioVenta from "../components/FormVent";
+import Snippets from "../components/snippets";
 
 // Generate Order Data
 
@@ -54,8 +55,10 @@ export default function Venta() {
 
     return (
         <React.Fragment>
+
             <div style={{ paddingTop: '64px', paddingRight: '16px' }}>
                 <Title>Ventas</Title>
+                <Snippets/>
                 <button type="button"
                         className={`btn ${showForm ? 'btn-danger' : 'btn-success'}`}
                         onClick={toggleForm}>

@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 
@@ -29,7 +21,22 @@ const BarChart = ({ endpoint, dataAttr1, dataAttr2 }) => {
         fetchData();
     }, [endpoint]);
 
-    const labels = data.map(item => item[dataAttr1]);
+    const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];
+
+    const labels = data.map(item => monthNames[item[dataAttr1] - 1]);
     const values = data.map(item => item[dataAttr2]);
 
     const chartData = {
@@ -38,7 +45,7 @@ const BarChart = ({ endpoint, dataAttr1, dataAttr2 }) => {
             {
                 label: `${dataAttr1} vs ${dataAttr2}`,
                 data: values,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: 'rgba(255, 0, 0, 0.8)', // Rojo fuerte
             },
         ],
     };
@@ -68,9 +75,18 @@ const BarChart = ({ endpoint, dataAttr1, dataAttr2 }) => {
                 text: 'Chart.js Bar Chart',
             },
         },
+        layout: {
+            padding: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+            },
+        },
     };
 
     return <Bar options={options} data={chartData} />;
 };
 
 export default BarChart;
+

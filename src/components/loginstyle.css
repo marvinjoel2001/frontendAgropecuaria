@@ -1,6 +1,6 @@
 :root {
     --p: hsl(213, 85%, 97%);
-    --s: hsl(233, 36%, 38%);
+    --s: hsl(114, 40%, 51%);
 }
 
 * {
@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: hsl(218, 50%, 91%);
+    background: hsl(110, 51%, 91%);
     height: 100vh;
 }
 
@@ -33,7 +33,7 @@ body {
 
 .screen-1 .email {
     background: hsl(0, 0%, 100%);
-    box-shadow: 0 0 2em hsl(231, 62%, 94%);
+    box-shadow: 0 0 2em hsl(142, 77%, 88%);
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@ body {
 
 .screen-1 .password {
     background: hsl(0, 0%, 100%);
-    box-shadow: 0 0 2em hsl(231, 62%, 94%);
+    box-shadow: 0 0 2em hsl(142, 77%, 88%);
     padding: 1em;
     display: flex;
     flex-direction: column;

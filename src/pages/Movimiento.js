@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from '../components/Title';
 import DataTable from "../components/Datatable";
+import Snippets from "../components/snippets";
 
 // Generate Order Data
 
@@ -51,6 +52,7 @@ export default function Movimiento() {
     return (
         <React.Fragment>
             <Title>Movimientos</Title>
+            <Snippets/>
                 <DataTable titles={titles} apiEndpoint={apiEndpoint} />
         </React.Fragment>
     );

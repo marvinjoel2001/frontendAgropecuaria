@@ -10,6 +10,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import {CloseSharp} from "@mui/icons-material";
+import AddToQueue from "@mui/icons-material/AddToQueue"
 
 export const mainListItems = (
     <React.Fragment>
@@ -27,7 +28,7 @@ export const mainListItems = (
         </ListItemButton>
         <ListItemButton component="a" href="/detalleventa">
             <ListItemIcon>
-                <ShoppingCartIcon />
+                <AddToQueue />
             </ListItemIcon>
             <ListItemText primary="Detalles Venta" />
         </ListItemButton>
@@ -64,23 +65,11 @@ export const secondaryListItems = (
         <ListSubheader component="div" inset>
             Reportes de Ventas
         </ListSubheader>
-        <ListItemButton component="a" href="/reportes/ventas-mes">
+        <ListItemButton component="a" href="ventas-dia">
             <ListItemIcon>
                 <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Ventas del Mes" />
-        </ListItemButton>
-        <ListItemButton component="a" href="/reportes/ventas-dia">
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Ventas del Día" />
-        </ListItemButton>
-        <ListItemButton component="a" href="/reportes/ventas-anio">
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Ventas del Año" />
+            <ListItemText primary="Ventas ultimos 10 Días" />
         </ListItemButton>
     </React.Fragment>
 );

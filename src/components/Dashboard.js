@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider,sx } from '@mui/material/styles';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -32,6 +32,7 @@ import Reporte from '../pages/Reporte';
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
+import ReporteVenta from "../pages/ReporteVenta";
 
 function CloseSharpIcon() {
     return null;
@@ -109,14 +110,25 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     },
 }));
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+    palette: {
+        primary: {
+            main: '#bcfd7f', // Color primario verde claro
+        },
+    },
+});
+
+const MainContent = styled(Box)({
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+});
 
 export default function Dashboard({ handleLogout }) {
     const [open, setOpen] = React.useState(false);
     const toggleDrawer = () => {
         setOpen(!open);
     };
-
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -145,9 +157,16 @@ export default function Dashboard({ handleLogout }) {
                                 Panel de Control
                             </Typography>
                             <IconButton color="inherit">
-                                <Badge badgeContent={4} color="secondary">
+                                <Badge badgeContent={0} color="secondary">
                                     <NotificationsIcon />
                                 </Badge>
+                            </IconButton>
+                            <IconButton color="inherit">
+                                <img
+                                    src="usuario.jpg"
+                                    alt="Usuario"
+                                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                />
                             </IconButton>
                         </Toolbar>
                     </AppBar>
@@ -169,18 +188,20 @@ export default function Dashboard({ handleLogout }) {
                         <Divider />
                         <List>{secondaryListItems}</List>
                     </Drawer>
-                    <Box
+                    <MainContent
                         component="main"
                         sx={{
                             flexGrow: 1,
                             height: '100vh',
                             overflow: 'auto',
                             ml: { sm: open ? `-${drawerWidth}px` : 0 },
-                            transition: theme => theme.transitions.create('margin', {
-                                easing: theme.transitions.easing.sharp,
-                                duration: theme.transitions.duration.leavingScreen,
-                            }),
+                            transition: (theme) =>
+                                theme.transitions.create('margin', {
+                                    easing: theme.transitions.easing.sharp,
+                                    duration: theme.transitions.duration.leavingScreen,
+                                }),
                             filter: open ? 'blur(3px)' : 'none', // Aplicar el filtro de desenfoque cuando open es true
+                            paddingTop: '64px', // Altura de la AppBar
                         }}
                     >
                         <Toolbar />
@@ -193,8 +214,19 @@ export default function Dashboard({ handleLogout }) {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             justifyContent: 'flex-start',
+                                            backgroundColor: 'primary.main', // Fondo verde claro
+                                            height: '100%', // Abarcar toda la pantalla
                                         }}
                                     >
+                                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2, mb: 4 }}>
+                                            <h6 style={{ color: 'white' }}>En línea</h6>
+
+                                            <img
+                                                src="usuario.jpg"
+                                                alt="Usuario"
+                                                style={{ width: '35px', height: '35px', borderRadius: '50%' }}
+                                            />
+                                        </Box>
                                         <Switch>
                                             <Route exact path="/" component={Chart} />
                                             <Route path="/reporte" component={Reporte} />
@@ -204,6 +236,7 @@ export default function Dashboard({ handleLogout }) {
                                             <Route path="/movimiento" component={Movimiento} />
                                             <Route path="/user" component={User} />
                                             <Route path="/detalleventa" component={DetalleVenta} />
+                                            <Route path="/ventas-dia" component={ReporteVenta} />
                                         </Switch>
                                         <LogoutButton handleLogout={handleLogout} />
                                     </Paper>
@@ -213,8 +246,7 @@ export default function Dashboard({ handleLogout }) {
                                 <Copyright />
                             </Box>
                         </Container>
-                    </Box>
-
+                    </MainContent>
                 </Router>
             </Box>
         </ThemeProvider>
